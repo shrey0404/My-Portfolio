@@ -7,24 +7,41 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-/**
- * Objects
- * /
- * Meshes*/
+// lights
+const directionalLight = new THREE.DirectionalLight('#fffffff',1)
+directionalLight.position.set(1,1,0)
+scene.add(directionalLight)
+
+// Material
+const material = new THREE.MeshToonMaterial({ color: '#ffeded'})
+
+/* Meshes*/
 const mesh1 =  new THREE.Mesh (
     new THREE.TorusGeometry(1, 0.4, 16, 60),
-    new THREE.MeshBasicMaterial({color: '#ff0000'})
+    material
 )
 const mesh2 = new THREE.Mesh (
     new THREE.ConeGeometry(1,2,32),
-    new THREE.MeshBasicMaterial({color: '#ff0000'})
+    material
 )
 const mesh3 = new THREE.Mesh (
     new THREE.TorusKnotGeometry(0.8,0.35,100,16),
-    new THREE.MeshBasicMaterial({color: '#ff0000'})
+    material
 )
 
 scene.add(mesh1, mesh2, mesh3)
+
+const sectionMeshes = [mesh1,mesh2,mesh3]
+
+const objectDistance = 4
+
+mesh1.position.y = -objectDistance*0
+mesh2.position.y = -objectDistance*1
+mesh3.position.y = -objectDistance*2
+
+mesh1.position.x = 2
+mesh2.position.x = -2
+mesh3.position.x = 2
 
 /**
  * Sizes
@@ -49,13 +66,19 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+
 /**
  * Camera
  */
+//group
+const cameraGroup = new THREE.Group()
+scene.add(cameraGroup)
+
 // Base camera
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
 camera.position.z = 6
-scene.add(camera)
+cameraGroup.add(camera)
+
 
 /**
  * Renderer
@@ -68,6 +91,25 @@ renderer.setClearAlpha(0)
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+//scroll
+let scrollY = window.scrollY
+
+window.addEventListener('scroll', () =>
+{
+    scrollY = window.scrollY
+})
+
+//cursor
+const cursor = {}
+cursor.x=0
+cursor.y=0
+
+window.addEventListener('mousemove', (event) =>
+{
+    cursor.x = event.clientX/sizes.width-0.5
+    cursor.y = event.clientY/sizes.height-0.5
+})
+
 /**
  * Animate
  */
@@ -76,6 +118,20 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    for(const mesh of sectionMeshes)
+    {
+        mesh.rotation.x = elapsedTime * 0.1
+        mesh.rotation.y = elapsedTime * 0.12
+    }
+
+    camera.position.y = - scrollY / sizes.height * objectDistance
+
+    const parallaxX = cursor.x
+    const parallaxY = -cursor.y
+
+    cameraGroup.position.x = parallaxX
+    cameraGroup.position.y = parallaxY
 
     // Render
     renderer.render(scene, camera)
