@@ -21,25 +21,33 @@ const mesh1 = new THREE.Mesh(
     material
 )
 const mesh2 = new THREE.Mesh(
-    new THREE.ConeGeometry(1, 2, 32),
-    material
+    new THREE.BoxGeometry(1.75,1.75,1.75),
+    material //DodecahedronGeometry(radius : Float, detail : Integer)
 )
 const mesh3 = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
     material
 )
+const mesh4 = new THREE.Mesh(
+    new THREE.ConeGeometry(1, 2, 32),
+    material
+)
+
 
 mesh1.position.y = - objectsDistance * 0
 mesh2.position.y = - objectsDistance * 1
 mesh3.position.y = - objectsDistance * 2
+mesh4.position.y = - objectsDistance * 3
+
 
 mesh1.position.x = 2
 mesh2.position.x = - 2
 mesh3.position.x = 2
+mesh4.position.x = - 2
 
-const sectionMeshes = [ mesh1, mesh2, mesh3 ]
+const sectionMeshes = [ mesh1, mesh2, mesh3, mesh4 ]
 
-scene.add(mesh1, mesh2, mesh3)
+scene.add(mesh1, mesh2, mesh3, mesh4)
 
 /**
  * Particles

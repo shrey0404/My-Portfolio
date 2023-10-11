@@ -33,24 +33,57 @@ html {
     will-change: transform;
 } */
 
-#donut
+#donut h1 
 {
-    display: flex;
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-family: 'Cabin', sans-serif;
+    color: #ffeded;
+    text-transform: uppercase;
+    font-size: 5vmin;
+    will-change: transform;
+}
+
+#donut p
+{
+    display: block;
+    position: absolute;
+    top: 30%;
+    text-align: center;
+    padding-left: 10%;
+    padding-right:50%;
+    font-family: 'Cabin', sans-serif;
+    color: #ffeded;
+    font-size: 2.5vmin;
+}
+    /*display: flex;
     align-items: center;
     height: 50vh;
     position: relative;
     font-family: 'Cabin', sans-serif;
     color: #ffeded;
     text-transform: uppercase;
-    font-size: 3vmin;
+    font-size: 4vmin;
     padding-left: 10%;
     padding-right: 10%;
     will-change: transform;
-}
+} */
 
-#cone
+#box h1
 {
-    display: flex;
+    display: block;
+    position: absolute;
+    left: 65%;
+    top: 120%;
+    font-family: 'Cabin', sans-serif;
+    color: #ffeded;
+    text-transform: uppercase;
+    will-change: transform;
+    font-size: 4vmin;
+
+    /*display: flex;
     align-items: center;
     height: 155vh;
     position: relative;
@@ -60,14 +93,15 @@ html {
     font-size: 3vmin;
     padding-left: 10%;
     padding-right: 10%;
-    will-change: transform;
+    will-change: transform;*/
 }
 
 #knot
 {
-    display: flex;
+    display: block;
+    /*display: flex;
     align-items: center;
-    height: 80vh;
+    height: 70vh;
     position: relative;
     font-family: 'Cabin', sans-serif;
     color: #ffeded;
@@ -75,9 +109,23 @@ html {
     font-size: 3vmin;
     padding-left: 10%;
     padding-right: 10%;
-    will-change: transform;   
+    will-change: transform;  */ 
 }
 
+#cone
+{
+    display: flex;
+    align-items: center;
+    height: 120vh;
+    position: relative;
+    font-family: 'Cabin', sans-serif;
+    color: #ffeded;
+    text-transform: uppercase;
+    font-size: 3vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+    will-change: transform;
+}
 
 section:nth-child(odd)
 {
